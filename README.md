@@ -62,7 +62,9 @@ module.exports = {
 import {add,sub}=require('./math)
 console.log(add());
 ```
+
 ## Fs command
+
 ```
 // create file
 // fs.writeFileSync("example.txt", "Hello, World!");
@@ -71,10 +73,10 @@ console.log(add());
 // fs.writeFileSync("example.txt","");
 
 // replace all data and add new data
-// fs.writeFileSync('./text.txt',"Welcome ")   
+// fs.writeFileSync('./text.txt',"Welcome ")
 
 // insert data not delete all
-// fs.appendFileSync('./text.txt',"Wello") 
+// fs.appendFileSync('./text.txt',"Wello")
 
 // read data
 // const data = fs.readFileSync('./text.txt',
@@ -105,9 +107,11 @@ console.log(add());
 ```
 
 ## MongoDb
-* no sql 
+
+- no sql
 
 ## Schema
+
 ```
 const express = require("express");
 const mongoose = require("mongoose");
@@ -168,3 +172,24 @@ const userSchema = new Schema({
 // Create model
 module.exports = mongoose.model("User", userSchema);
 ```
+
+## Model View Controller
+
+## Model
+
+- we craete schema for databases
+- we create model from schema
+- we use model to interact with database
+
+## View
+
+- we create html template
+- we use template engine to render data to html template
+- we use view to render data to user
+
+## Controller
+
+- we create controller to handle request and response
+- we use model to interact with database
+- we use view to render data to user
+- we craete `CRUD` Operation for data base
