@@ -1,15 +1,17 @@
-// const math = require('./math')
+const express = require("express");
+const mongoose = require("mongoose");
+const userRoutes = require("./routes/userRoutes");
+const app = express();
+app.use(express.json());
+app.use("/api/users", userRoutes);
 
-// console.log(math.add(10,15))
-// console.log(math.sub(10,5))
-// console.log(math.greet())
+mongoose
+  .connect("mongodb://localhost:27017")
+  .then(() => {
+    console.log("Connected To MongDb");
+  })
+  .catch((err) => console.log("Error", err));
 
-const { add, sub } = require("./math");
-const { wel, hello } = require("./welcome");
-const greet = require("./greet");
-console.log(add(10, 15));
-console.log(sub(10, 5));
-
-console.log(wel());
-console.log(hello());
-console.log(greet());
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
