@@ -1,10 +1,36 @@
-const userSchema = require('../models/User')
-exports.createUser = () => {
-  console.log("Hello from createUser.js");
+const User = require("../models/User");
+exports.createUser = async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    return res.status(200).send(user);
+  } catch (error) {
+    // console.error(error);
+    return res.status(500).send(error.message);
+  }
 };
+
 exports.allUser = async (req, res) => {
-  res.send("userSchema.FirstName")
+  try {
+    const users = await User.find({});
+    res.send(users);
+    res.status(200).send({ Success: true });
+  } catch (error) {
+    // console.error(error);
+    return res.status(500).send(error.message);
+  }
 };
-exports.updateUser = () => {
-  console.log("Hello from createUser.js");
+exports.deleteUser = async (req, res) => {};
+exports.getUserById = async (req, res) => {
+  try {
+    const id = await User.findById(req.params.id);
+    return res.status(200).send(id);
+  } catch (error) {
+    // console.error(error);
+    return res.status(500).send(error.message);
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  res.send("Here we write the code of update user");
 };

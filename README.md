@@ -183,6 +183,7 @@ module.exports = mongoose.model("User", userSchema);
 
 ## View
 
+- Using Raact..
 - we create html template
 - we use template engine to render data to html template
 - we use view to render data to user
@@ -192,4 +193,4 @@ module.exports = mongoose.model("User", userSchema);
 - we create controller to handle request and response
 - we use model to interact with database
 - we use view to render data to user
-- we craete `CRUD` Operation for data base
+- we craete `CRUD` `(CREATE, READ, UPDATE, DELETE)`Operation for data base

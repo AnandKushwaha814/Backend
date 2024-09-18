@@ -14,16 +14,14 @@ const userSchema = new Schema({
   Email: {
     type: String,
     required: true,
-    unique: true,
+    // unique: false,
   },
   Phone: {
     type: Number,
     required: true,
-    unique: true,
   },
   designation: {
     type: String,
-    required: true,
   },
   createDate: {
     type: Date,
