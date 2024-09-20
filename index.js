@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
+const UserAuth = require("./routes/AuthRoutes");
 const app = express();
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/users/create", userRoutes);
 app.use("/api/users/update", userRoutes);
+app.use("/api/userAuth", UserAuth);
 
 mongoose
   .connect("mongodb://localhost:27017")
