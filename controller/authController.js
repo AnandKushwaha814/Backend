@@ -1,5 +1,6 @@
 const UserAuth = require("../models/AuthUser");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.registerUesr = async (req, res) => {
   const { username, email, password } = req.body;
@@ -19,7 +20,6 @@ exports.registerUesr = async (req, res) => {
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
-
     // Create a new user with the hashed password and save it to the database
     const newUser = new UserAuth({ username, email, password: hashedPassword });
     await newUser.save();
@@ -29,6 +29,27 @@ exports.registerUesr = async (req, res) => {
   }
 };
 
+// Login
 exports.loginUser = async (req, res) => {
-  res.send("register");
+  const { email, password } = req.body;
+  // Check if the user already exists in the database
+  const emailExists = await UserAuth.findOne({ email: email });
+  if (!emailExists) {
+    res.status(200).send("invalid username or password");
+  }
+  // password must be 8th char
+  const checkPassword = await bcrypt.compare(password, emailExists.password);
+  if (!checkPassword) return res.status(400).send("Invalid Password");
+  // use jwt token
+  const token = jwt.sign(
+    {userId: emailExists._id },
+    "abc",
+    // process.env.SECRET_KEY,
+    ({
+      expiresIn: "1h",
+    })
+  );
+  res.json({ token });
+
+  console.log(token);
 };

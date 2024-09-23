@@ -12,9 +12,9 @@ exports.createUser = async (req, res) => {
 
 exports.allUser = async (req, res) => {
   try {
-    const users = await User.find({});
-    res.send(users);
-    res.status(200).send({ Success: true });
+    const users = await User.find();
+    // res.send(users);
+    res.status(200).json(users);
   } catch (error) {
     // console.error(error);
     return res.status(500).send(error.message);
@@ -34,3 +34,5 @@ exports.getUserById = async (req, res) => {
 exports.updateUser = async (req, res) => {
   res.send("Here we write the code of update user");
 };
+
+

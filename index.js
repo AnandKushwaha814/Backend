@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const UserAuth = require("./routes/AuthRoutes");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use("/api/users", userRoutes);
@@ -16,6 +17,16 @@ mongoose
   })
   .catch((err) => console.log("Error", err));
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  app.get('/api/users', (req, res) => {
+  
+    res.send(User);
+  })
+  app.use(cors());
+
+  const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server at http://localhost:${port}`);
 });
+
+// middleware
+app.use
