@@ -13,7 +13,7 @@ const { dataShow } = require("../controller/userDefineData");
 
 router.post("/create", createUser);
 router.get("/all", allUser);
-router.get("/update", updateUser);
+router.put("/update/:id", updateUser);
 router.get("/getUserById/:id", getUserById);
 router.get("/showdata", showData);
 router.get("/data-show", dataShow);

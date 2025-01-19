@@ -1,10 +1,10 @@
 const UserAuth = require("../models/AuthUser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.registerUesr = async (req, res) => {
   const { username, email, password } = req.body;
-
   try {
     // Check if the user already exists in the database
     const userExists = await UserAuth.findOne({ username: username });
@@ -19,7 +19,6 @@ exports.registerUesr = async (req, res) => {
     }
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
-
     // Create a new user with the hashed password and save it to the database
     const newUser = new UserAuth({ username, email, password: hashedPassword });
     await newUser.save();
@@ -42,12 +41,9 @@ exports.loginUser = async (req, res) => {
   if (!checkPassword) return res.status(400).send("Invalid Password");
   // use jwt token
   const token = jwt.sign(
-    {userId: emailExists._id },
-    "abc",
-    // process.env.SECRET_KEY,
-    ({
-      expiresIn: "1h",
-    })
+    { userId: emailExists._id }, // Payload data
+    process.env.JWT_SECRECT, // Secret key from environment variables
+    { expiresIn: "1h" } // Token expiration time
   );
   res.json({ token });
 

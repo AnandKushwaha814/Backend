@@ -25,9 +25,11 @@ exports.getUserById = async (req, res) => {
   try {
     const id = await User.findById(req.params.id);
     return res.status(200).send(id);
+  
   } catch (error) {
     // console.error(error);
     return res.status(500).send(error.message);
+    
   }
 };
 
